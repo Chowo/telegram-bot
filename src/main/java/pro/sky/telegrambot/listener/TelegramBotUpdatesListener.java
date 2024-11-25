@@ -42,6 +42,10 @@ public class TelegramBotUpdatesListener implements UpdatesListener {
     @Override
     public int process(List<Update> updates) {
         updates.forEach(update -> {
+            if (update == null) {
+                logger.warn("Update is null");
+                return;
+            }
             String text = update.message().text();
             logger.info("Processing update text: {}", text);
             if (update.message() == null && !text.isBlank()) {
